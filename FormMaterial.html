@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-Material-Design</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./FormMaterial.css">
+</head>
+
+<body>
+
+    <div class="container c">
+        <h3 class="green-text">Summer Camp Registration Form</h3>
+        <form action="" class="summer_camp_form" id="mainFormId">
+            <div class="input-field">
+                <input type="text" id="fname">
+                <label class="active" for="fname">First Name</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img1">
+                <span class="error_msg" id="error_msg1"></span>
+            </div>
+            <div class="input-field">
+                <input type="text" id="lname">
+                <label class="active" for="lname">Last Name</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img2">
+                <span class="error_msg" id="error_msg2"></span>
+            </div>
+            <div class="input-field">
+                <input type="email" id="email" class="validate">
+                <label class="active" for="email">Email</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img3">
+                <span class="error_msg" id="error_msg3"></span>
+            </div>
+            <div class="input-field">
+                <input type="password" id="password">
+                <label class="active" for="password">password</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img4">
+                <span class="error_msg" id="error_msg4"></span>
+            </div>
+            <div class="input-field">
+                <input type="text" id="mobileno">
+                <label class="active" for="mobileno">MobileNo</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img5">
+                <span class="error_msg" id="error_msg5"></span>
+            </div>
+            <div class="input-field col s12">
+                <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
+                <label for="textarea1">Address</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img6">
+                <span class="error_msg" id="error_msg6"></span>
+            </div>
+            <!-- <div class="input-field">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Upload Your Photo</span>
+                        <input type="file" id="image_id">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img7">
+                <span class="error_msg" id="error_msg7"></span>
+            </div> -->
+            <!-- <div class="input-field-relationShip">
+                <label for="">Relationship With Student</label>
+                <label>
+                    <input class="with-gap gender" id="father" name="group3" type="radio" checked onclick="genderValidation()"/>
+                    <span>Father</span>
+                  </label>
+                  <label>
+                    <input class="with-gap gender" id="mother" name="group3" type="radio" checked onclick="genderValidation()" />
+                    <span>Mother</span>
+                  </label>
+                  <label>
+                    <input class="with-gap gender" id="guardian" name="group3" type="radio" checked onclick="genderValidation()"/>
+                    <span>Local Guardian</span>
+                  </label>
+                 
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img8">
+                <span class="error_msg" id="error_msg8"></span>
+            </div> -->
+
+            <div class="input-field s12">
+                <select id="select_id">
+                    <option value="" disabled selected><label class="choose_label" for="">Choose your option</label></option>
+                    <option value="1">xxx</option>
+                    <option value="2">yyy</option>
+                    <option value="3">zzz</option>
+                </select>
+                <label>District</label>
+                <img src="./images/icon-error.svg" alt="error" class="error_img" id="error_img9">
+                <span class="error_msg" id="error_msg9"></span>
+            </div>
+
+            <!-- Dynamicaly add Forms here -->
+            <div class="dynamicallyAddForms" id="dynamicFormId">
+
+            </div>
+
+            <!-- Floating Buttons -->
+            <div class="add_student_btn">
+                <div class="div">
+                <a href="#" class="btn-floating red btn-large" id="addFormBtnId"><i class="large material-icons">add</i></a>
+                <span>Add Student Details</span>
+                </div>      
+            </div>
+           <div class="formSubmissionButton">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+           </div>
+           
+
+
+        </form>
+       
+    </div>   <!-- container closing -->
+    <div style="height: 200px">
+
+    </div>
+
+
+    <!-- Jquery CDN ,it initilize before java script inilization -->
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./FormMaterial.js"></script>
+    <script src="./Material.js"></script>
+
+</body>
+
+</html>
