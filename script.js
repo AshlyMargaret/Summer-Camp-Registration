@@ -515,7 +515,7 @@ mainForm.addEventListener("submit", (event) => {
 
         
 
-        if (firstName && secondName && email && password && phonenumber && address && SelectOption &&  studentBday && studentBday && studentImage) {
+        if (firstName && secondName && email && password && phonenumber && address && SelectOption &&  studentName && studentBday && studentImage) {
             alert("sucessfully registered");
             console.log("sucessfully registered");
             return true;
