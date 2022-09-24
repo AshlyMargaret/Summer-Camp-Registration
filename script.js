@@ -223,24 +223,73 @@ function showErrorForInputField(errorImageId, errorMesssageId, error) {
 let addFormBtn = document.getElementById("addFormBtnId");
 let dynamicForm = document.getElementById("dynamicFormId");
 let counter = 1;
+let activeIdArray = [];
 
  // Create a form dynamically
 
  addFormBtn.addEventListener("click",addForm);
- 
+
+
  function addForm(event){
   event.preventDefault();
+
   addDynamicStudentForm(counter);
-  counter++;
+
+  console.log(`studentFormId-${counter}`);
+
+  activeIdArray.push(counter);
+   
+  console.log("Active Form Ids Are",activeIdArray);
+
+
+  console.log(`deleteInputId-${counter}`);
+  var dltbtn = document.getElementById(`deleteInputId-${counter}`);
+  console.log("deletebutton-",dltbtn);
+  
+  let studForm =  document.getElementById(`studentFormId-${counter}`) 
+  dltbtn.addEventListener("click",deleteFunc)
+   
+   function deleteFunc(){
+    console.log("select for delete",studForm)
+   
+    let deletedId =  studForm.id;
+    console.log("deleted id",deletedId)
+
+    let text = deletedId;
+    const myArray = text.split("-");
+    console.log("my array is",myArray);
+
+   
+    let lastElement = myArray.slice(-1);
+    let lastElementValue = parseInt(lastElement);
+    console.log("last element is",lastElementValue);
+    var myIndex =  activeIdArray.indexOf(lastElementValue);
+    studForm.remove();
+
+    if (myIndex !== -1) {
+    activeIdArray.splice(myIndex, 1);
+     }
+    console.log(activeIdArray)
+
+     console.log("Deleted Form Ids Are",activeIdArray);
+    //    counter--;
+       return;
+     }
+
+     counter++;
+     console.log(activeIdArray);
+
+  return;
  }
 
+ 
 
 function addDynamicStudentForm(counter){
     
   // create heading element
   let h2Element = document.createElement("h5");
   h2Element.setAttribute("class","student_heading green-text")
-  h2Element.innerHTML = `Student ${counter}`
+  h2Element.innerHTML = `Student Registration Form`;
 
   // Create a form element
   let form = document.createElement("form");
@@ -263,6 +312,9 @@ function addDynamicStudentForm(counter){
 
   let inputDivFileUpload = document.createElement("div");
   inputDivFileUpload.setAttribute("class","file-field input-field")
+
+  let deleteInputButton = document.createElement("div");
+  deleteInputButton.setAttribute("class","input-field")
 
   
 
@@ -360,6 +412,13 @@ function addDynamicStudentForm(counter){
   let imagePreview = document.createElement("div")
   imagePreview.setAttribute("id",`imagePreview-${counter}`)
  
+// Delete Form button
+let newDeleteButton = document.createElement('input');
+newDeleteButton.setAttribute("id",`deleteInputId-${counter}`)
+newDeleteButton.type = 'button';
+newDeleteButton.value = "Delete";
+newDeleteButton.name = 'deleteForm';
+
 
 
 //Appending Section
@@ -398,6 +457,9 @@ function addDynamicStudentForm(counter){
   inputDivFileUpload.appendChild(filePathWrapperDiv);
   filePathWrapperDiv.appendChild(filepathInput);
   form.appendChild(imagePreview);
+
+  form.appendChild(deleteInputButton);
+  deleteInputButton.appendChild(newDeleteButton)
  
   
   
@@ -408,23 +470,29 @@ function addDynamicStudentForm(counter){
 // event listners
 bindListners();
 
-
+ 
 
 mainForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    for(let i=1;i<counter;i++){
-        console.log(`studentfullNameId-${i}`);
-        console.log(`studentdobId-${i}`);
-        console.log(`studentImageId-${i}`);
-        console.log(`imagePreview-${i}`);
+    for(let i=0;i<activeIdArray.length;i++){
        
+     console.log(activeIdArray[i]);
+     let studentId = activeIdArray[i];
 
-        let StudentNameValue = document.getElementById(`studentfullNameId-${i}`).value;
-        let studentDobValue = document.getElementById(`studentdobId-${i}`).value;
-        let studentImageId = document.getElementById(`studentImageId-${i}`);
-        let imagePreview = document.getElementById(`imagePreview-${i}`);
+        console.log(`studentfullNameId-${studentId}`);
+        console.log(`studentdobId-${studentId}`);
+        console.log(`studentImageId-${studentId}`);
+        console.log(`imagePreview-${studentId}`);
+    
+       
+       
+        let StudentNameValue = document.getElementById(`studentfullNameId-${studentId}`).value;
+        let studentDobValue = document.getElementById(`studentdobId-${studentId}`).value;
+        let studentImageId = document.getElementById(`studentImageId-${studentId}`);
+        let imagePreview = document.getElementById(`imagePreview-${studentId}`);
         console.log(StudentNameValue);
         console.log(studentDobValue);
+       
         
 // validate student name
         function validateStudentName(){
@@ -473,6 +541,8 @@ mainForm.addEventListener("submit", (event) => {
         return false;
 
     }else{
+
+       
         // if(studentImageId.files && studentImageId.files[0]){
         //     var reader = new FileReader();
             
@@ -480,13 +550,17 @@ mainForm.addEventListener("submit", (event) => {
         //     imagePreview.innerHTML ='<img src="' + e.target.result+ '"/>';
         // };
         //     reader.readAsDataURL(studentImageId.files[0]);
+
+       
+
             return true;
     
   }    
  }
- }
 
-        // for loop end
+    
+ }
+ // for loop end
       
         const firstName = validateFirstName();
         console.log(firstName);
