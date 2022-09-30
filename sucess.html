@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucess Page</title>
+    <link rel="stylesheet" href="style.css">
+     <!-- lottie-player inilization -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+   
+
+  <!-- Jquery CDN ,it initilize before java script inilization -->
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.0/lottie.min.js"></script>
+   
+</head>
+<body>
+  
+    <div id="svg__01" class="lottie"></div>
+
+    <div class="displaySummerCamp">
+        <h4><a href="#display">Summer Camp 2k22</a></h4>
+        <div class="display_user_details">
+          <p id="user"></p>
+          <div class="student">
+            <p id="student_id-"></p>
+          </div>
+         <table id="display">
+  <tr>
+    <th>First Name </th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Password</th>
+    <th>Phone Number</th>
+    <th>Address</th>
+    <th>District</th>
+  </tr>
+  <tr>
+    <td id="firstNameId"></td>
+    <td id="lastNameId"></td>
+    <td id="emailId"></td>
+    <td id="pswdId"></td>
+    <td id="phnId"></td>
+    <td id="addressId"></td>
+    <td id="districtId"></td>
+  </tr>
+  
+</table>
+
+<!-- Button for view Student details -->
+
+<!-- <button id="btn">Click Here For Student Details</button> -->
+<div id="studentP"></div>
+</div>
+</div>
+
+  
+<div class="backToPage">
+    <a href="./index.html">Back To Registration Page</a>
+</div>
+
+<div style="height:100px ;"></div>
+
+<!-- lottie animation -->
+  <script>
+    const animationRemote = bodymovin.loadAnimation({
+      container: document.getElementById('svg__01'),
+      path: './104368-thank-you.json',
+      autoplay: true,
+      renderer: 'svg',
+      loop: false
+     
+    })
+
+</script>
+
+<!-- Displaying  -->
+
+<script >
+
+var data = localStorage.getItem("REGISTRATION_DATA");
+console.log(data);
+var obj = JSON.parse(data);
+console.log(obj);
+
+// document.getElementById("user").innerHTML="First Name: " +obj.parentObject.parentFirstName + " " + obj.parentObject.parentLastName + "<br>" +
+// "Email: " +  obj.parentObject.parentEmail + "<br>"  +"District: " + obj.parentObject.parentDistrict + "<br>" ;
+document.getElementById("firstNameId").innerHTML=obj.parentObject.parentFirstName
+document.getElementById("lastNameId").innerHTML=obj.parentObject.parentLastName
+document.getElementById("emailId").innerHTML=obj.parentObject.parentEmail
+document.getElementById("pswdId").innerHTML=obj.parentObject.parentPassword
+document.getElementById("phnId").innerHTML=obj.parentObject.parentPhoneNumber
+document.getElementById("addressId").innerHTML=obj.parentObject.parentAddress
+document.getElementById("districtId").innerHTML=obj.parentObject.parentDistrict
+
+
+
+// dynamic creating student
+
+let studentBtn = document.getElementById("btn")
+console.log(obj.studentObject);
+let studentObjLength = obj.studentObject.length;
+console.log("length is:",studentObjLength);
+let studentPara = document.getElementById("studentP")
+
+
+studentPage(studentObjLength);  // dynamic calling student
+
+function studentPage(length){
+  let counter = 1;
+  for(let i=0; i<length; i++){
+   
+    let pTag = document.createElement("p");
+    pTag.setAttribute("id",`pId-${counter}`)
+    pTag.setAttribute("class","studentContainer")
+    console.log(pTag);
+    console.log(`pId-${counter}`);
+    pTag.innerHTML = `STUDENT NAME:${obj.studentObject[i].studentName}` +"</br>"+ `STUDENT DOB:${obj.studentObject[i].studentBirthday}` +"</br>"+ `STUDENT Image:${obj.studentObject[i].studentProfileImage}` +"</br>" ;
+    studentPara.appendChild(pTag)
+    counter++;
+  }
+  
+  return; 
+}
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -177,7 +177,6 @@ let activeIdArray = [];
 
 
  function addForm(e){
-    if(e)
   e.preventDefault();
 
   addDynamicStudentForm(counter);
@@ -472,6 +471,33 @@ if (!allowedExtensions.exec(studentImageValue)&& !studentImageValue) {
 
 bindListners();
 
+// constructor method for creating object
+
+function StudentObj(studentNameVal,studentBdayVal,studentImageVal){
+
+    this.studentName=studentNameVal;
+    this.studentBirthday=studentBdayVal;
+    this.studentProfileImage=studentImageVal;
+
+}
+
+function ParentObject(firstNameVal,secondNameVal,emailVal,passwordVal,addressVal,phonenumberVal,SelectOptionVal){
+    this.parentFirstName=firstNameVal;
+    this.parentLastName=secondNameVal;
+    this.parentEmail=emailVal;
+    this.parentPassword=passwordVal;
+    this.parentAddress=addressVal;
+    this.parentPhoneNumber=phonenumberVal;
+    this.parentDistrict=SelectOptionVal;
+}
+
+function RegistrationFormObj(parentObject,studentObject){
+    this.parentObject = parentObject;
+    this.studentObjects = studentObject;
+}
+
+
+
 
 
 // form submision function
@@ -499,7 +525,8 @@ mainForm.addEventListener("submit", (event) => {
             return;
      }
 
-    const parentObject=  parentObjectFunc(firstName,secondName,email,password,phonenumber,address,SelectOption)
+   const parentObject= parentObjectFunc(firstName,secondName,email,password,phonenumber,address,SelectOption)  
+
      console.log(parentObject);
     
 // getting student input data values using for loop based how many student form created
@@ -529,12 +556,19 @@ for(let i=0;i<activeIdArray.length;i++){
             M.toast({html: '"Registration Denined!'})
               return;
        }  
-       const studentObjects = studentobjFunc(studentName,studentBday,studentImage);  // creating object for displaying
-       console.log(studentObjects);
+  
+      const studentObj = new StudentObj(studentName,studentBday,studentImage)
+      console.log("last student form obj is:",studentObj) // here display the last loop element
 
-     
-       console.log("last student form obj is:",studentObjects) // here display the last loop element
-       studentObjArray.push(studentObjects);
+    //   if(i%2==0){
+    //     const studentObj =  new StudentObj(studentName,studentBday,studentImage)
+    //     studentObjArray.push(studentObj);
+    //     console.log("last student form obj is:",studentObj)
+    //   }
+    // else{const studentObj = new StudentObj(studentName)
+    //     studentObjArray.push(studentObj);  
+    //     console.log("last student form obj is:",studentObj)    
+    // }
        
   
 }  // for loop end
@@ -542,16 +576,13 @@ for(let i=0;i<activeIdArray.length;i++){
 
         M.toast({html: '"Sucessfully Regitred!'}) // Show succesfull message here
 
-
+// creating registrationFormObject object for displaying
             
-           const registrationFormObject = registrationFormObjFunc(parentObject,studentObjArray)  // creating registrationFormObject object for displaying
+           const registrationFormObject = registrationFormObjFunc(parentObject,studentObjArray)
            console.log("Registration Form Objects is:",registrationFormObject)
 
-
-            storeUserDataInSession(registrationFormObject); //  i have passed the object as a parameter.will expect JSON string
-
         
-        window.location.href = "./sucess.html";  //if form submission is sucessfull ,Redirected to next page
+        // window.location.href = "./sucess.html";  //if form submission is sucessfull ,Redirected to next page
      
         // document.forms[0].reset();      // clear the form fields for next registration
 });
@@ -592,18 +623,8 @@ function registrationFormObjFunc(parentObjectVal,studentObjectVal){
     }
 
 
-    // The JSON.stringyfy() function create a JSON string out of an object/array.
 
-    function storeUserDataInSession(userData) {
-    
-        var userObjectString = JSON.stringify(userData);
-        console.log("JSON String Is",userObjectString)
 
-        window.sessionStorage.setItem('userObject',userData);
-        localStorage.setItem( "REGISTRATION_DATA" ,userObjectString)
-       
-       
-    }   
 
 
 
